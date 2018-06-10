@@ -83,11 +83,7 @@ REDMINE_PROJECT_ID = inifile.get('BASE_SETTINGS', 'REDMINE_PROJECT_ID')
 #        line = line.rstrip('\r\n')
 #        project_elements = line.split(',')
 #
-#        # アラート件数を取る
-#        if argc == 4:
-#            URL_PARAM = "/issues.json?key="+REDMINE_API_KEY+"&project_id="+str(REDMINE_PROJECT_ID)+"&created_on=%3E%3C"+str(FROM_DATE)+"|"+str(TO_DATE)+"&tracker_id="+str(tracker_id)+"&status_id=*"
-#        else:
-#            URL_PARAM = "/issues.json?key="+REDMINE_API_KEY+"&project_id="+str(REDMINE_PROJECT_ID)+"&created_on="+str(FROM_DATE)+"&tracker_id="+str(tracker_id)+"&status_id=*"
+#        URL_PARAM = "/issues.json?key="+REDMINE_API_KEY+"&project_id="+str(REDMINE_PROJECT_ID)+"&created_on="+str(FROM_DATE)+"&tracker_id="+str(tracker_id)+"&status_id=*"
 #
 #        json_data = gil.get_issue_list(REDMINE_URL, URL_PARAM)
 #        ticket_count = json_data['total_count']
@@ -101,8 +97,10 @@ REDMINE_PROJECT_ID = inifile.get('BASE_SETTINGS', 'REDMINE_PROJECT_ID')
 # Issue JSON
 tracker_id = 5
 URL_PARAM = "/issues.json?key="+str(REDMINE_API_KEY)+"&project_id="+str(REDMINE_PROJECT_ID)+"&created_on=%3E%3C"+str(FROM_DATE)+"|"+str(TO_DATE)+"&tracker_id="+str(tracker_id)+"&status_id=*&offset="+str(issue_list_offset)+"&limit="+str(ISSUE_LIST_LIMIT)
-
 json_data = gil.get_issue_list(REDMINE_URL, URL_PARAM)
+
+#json_data = gil.get_issue_list('param_url':REDMINE_URL,'param_key':REDMINE_API_KEY,'param_project_id':REDMINE_PROJECT_ID,'','param_create':created_on,'param_tracker':tracker_id,'param_status_id':status_id,param_fromdate':FROM_DATE,'param_todate':TO_DATE,'param_offset':issue_list_offset,'param_limit':ISSUE_LIST_LIMIT)
+
 TOTAL_ISSUE_COUNT = json_data['total_count']
 
 print (TOTAL_ISSUE_COUNT)
@@ -141,16 +139,6 @@ else:
     while ir < issue_list_remainder:
         print (u'{}\t{}'.format(json_data['issues'][ir]['id'],json_data['issues'][ir]['subject']))
         ir = ir + 1
-        
-    
-
-ii = 0
-#print (json.dumps(json_data , sort_keys = True, indent = 4))
-
-#while ii < TOTAL_ISSUE_COUNT:
-#    print (u'{}\t{}'.format(json_data['issues'][ii]['id'],json_data['issues'][ii]['subject']))
-#    ii = ii + 1
 
 
-# 合計件数を表示
 #print ("合計," + str(issue_sum))
