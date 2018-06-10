@@ -18,10 +18,10 @@ sys.stdout= io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 # 変数定義
 projects_list_name = []
 projects_list_id = []
-num_limit = 100
-num_pager = 0
-num_count = 0
-ticket_sum = 0
+list_limit = 100
+list_pager = 0
+list_count = 0
+issue_sum = 0
 
 
 # 引数チェック
@@ -82,9 +82,9 @@ with open("bin/redmine/project_list.conf", "r", encoding="UTF-8") as fh:
         else:
             URL_PARAM = "/issues.json?key="+REDMINE_API_KEY+"&project_id="+str(REDMINE_PROJECT_ID)+"&created_on="+str(FROM_DATE)+"&tracker_id="+str(tracker_id)+"&status_id=*"
 
-        json_data = grl.get_project_list(REDMINE_URL, URL_PARAM)
+        json_data = grl.get_issue_list(REDMINE_URL, URL_PARAM)
         ticket_count = json_data['total_count']
-        ticket_sum = ticket_sum + ticket_count
+        issue_sum = issue_sum + ticket_count
 
         # 件数を表示
         print (project_elements[2] + "," + str(ticket_count))
@@ -92,4 +92,4 @@ with open("bin/redmine/project_list.conf", "r", encoding="UTF-8") as fh:
 #        print output.decode('utf-8')
 
 # 合計件数を表示
-print ("合計," + str(ticket_sum))
+print ("合計," + str(issue_sum))
