@@ -11,7 +11,7 @@ import requests
 # param_tracker = tracker_id
 # param_status = status_id
 
-def get_project_list(**kwargs):
+def get_issue_list(**kwargs):
     if kwargs['param_to'] == "" : # 日付指定
         request_url = kwargs['param_url'] + "/issues.json?key=" + kwargs['param_key'] + "&project_id=" + kwargs['param_project'] + "&created_on=" + kwargs['param_from'] + "&tracker_id=" + str(kwargs['param_tracker']) + "&status_id=" + kwargs['param_status']
 
